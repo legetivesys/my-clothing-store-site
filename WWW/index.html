@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Магазин стильного одягу для кожного. Ми пропонуємо тільки найкращі модні новинки!">
+    <meta name="author" content="Нікіта Лозицький">
+    <title>Магазин Одягу</title>
+    <style>
+        /* Загальні стилі */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Заголовок */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+        }
+        header .logo h1 {
+            font-size: 24px;
+        }
+        header nav ul {
+            list-style: none;
+            display: flex;
+        }
+        header nav ul li {
+            margin: 0 15px;
+        }
+        header nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        /* Головна секція */
+        .hero {
+            background-image: url('https://i.postimg.cc/k4LWKpSy/image.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 20px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero h2 {
+            font-size: 36px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .hero p {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        .hero .btn {
+            background-color: #e74c3c;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+        .hero .btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Секція товарів */
+        .products {
+            padding: 50px 20px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        .products h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .product-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .product-item {
+            background-color: #fff;
+            width: 30%;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .product-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Зміна розміру зображень */
+        .product-item img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Модальне вікно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            overflow: auto;
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 60%; /* Зменшена ширина модального вікна */
+            max-width: 800px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Додаткові картинки в модальному вікні */
+        .modal-images {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .modal-images img {
+            width: 30%;
+            height: auto;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        /* Секція контактів */
+        .contact {
+            padding: 50px 20px;
+            background-color: #fff;
+            text-align: center;
+        }
+        .contact p {
+            font-size: 18px;
+        }
+
+        /* Анімації */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Заголовок -->
+    <header>
+        <div class="logo">
+            <h1>Магазин Одягу</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Головна</a></li>
+                <li><a href="#about">Про нас</a></li>
+                <li><a href="#products">Товари</a></li>
+                <li><a href="#contact">Контакти</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Головна секція -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h2>Найкращі колекції одягу для вашого стилю!</h2>
+            <p><b>Шукаєте стильний одяг? У нас ви знайдете тільки найкраще!</b></p>
+            <a href="#products" class="btn">Переглянути товари</a>
+        </div>
+    </section>
+
+    <!-- Секція товарів -->
+    <section id="products" class="products">
+        <h2>Наші товари</h2>
+        <div class="product-list">
+            <!-- Товари -->
+            <div class="product-item" onclick="openModal('Стильна куртка', 'Комфортна і стильна куртка для будь-якої погоди.', 'https://i.postimg.cc/ZqMVK29V/images.jpg', '1500 грн')">
+                <img src="https://i.postimg.cc/ZqMVK29V/images.jpg" alt="Товар 1">
+                <h3>Стильна куртка</h3>
+                <p>Комфортна і стильна куртка для будь-якої погоди.</p>
+            </div>
+            <div class="product-item" onclick="openModal('Модні джинси', 'Прекрасно сидять на будь-якій фігурі.', 'https://i.postimg.cc/ZqMVK29V/images.jpg', '1200 грн')">
+                <img src="https://i.postimg.cc/ZqMVK29V/images.jpg" alt="Товар 2">
+                <h3>Модні джинси</h3>
+                <p>Прекрасно сидять на будь-якій фігурі.</p>
+            </div>
+            <div class="product-item" onclick="openModal('Класичні футболки', 'Футболки для кожного дня з сучасними принтами.', 'https://i.postimg.cc/ZqMVK29V/images.jpg', '800 грн')">
+                <img src="https://i.postimg.cc/ZqMVK29V/images.jpg" alt="Товар 3">
+                <h3>Класичні футболки</h3>
+                <p>Футболки для кожного дня з сучасними принтами.</p>
+            </div>
+            <div class="product-item" onclick="openModal('Спортивний костюм', 'Ідеальний для тренувань та активного відпочинку.', 'https://i.postimg.cc/ZqMVK29V/images.jpg', '1800 грн')">
+                <img src="https://i.postimg.cc/ZqMVK29V/images.jpg" alt="Товар 4">
+                <h3>Спортивний костюм</h3>
+                <p>Ідеальний для тренувань та активного відпочинку.</p>
+            </div>
+            <div class="product-item" onclick="openModal('Шарф з вовни', 'Теплий та стильний аксесуар для холодної погоди.', 'https://i.postimg.cc/ZqMVK29V/images.jpg', '500 грн')">
+                <img src="https://i.postimg.cc/ZqMVK29V/images.jpg" alt="Товар 5">
+                <h3>Шарф з вовни</h3>
+                <p>Теплий та стильний аксесуар для холодної погоди.</p>
+            </div>
+            <div class="product-item" onclick="openModal('Легкі туфлі', 'Комфортні та елегантні туфлі для будь-якої події.', 'https://i.postimg.cc/ZqMVK29V/images.jpg', '1300 грн')">
+                <img src="https://i.postimg.cc/ZqMVK29V/images.jpg" alt="Товар 6">
+                <h3>Легкі туфлі</h3>
+                <p>Комфортні та елегантні туфлі для будь-якої події.</p>
+            </div>
+            <div class="product-item" onclick="openModal('Спідниця для вечірок', 'Вишукана спідниця для святкових подій.', 'https://i.postimg.cc/ZqMVK29V/images.jpg', '900 грн')">
+                <img src="https://i.postimg.cc/ZqMVK29V/images.jpg" alt="Товар 7">
+                <h3>Спідниця для вечірок</h3>
+                <p>Вишукана спідниця для святкових подій.</p>
+            </div>
+            <div class="product-item" onclick="openModal('Пальто з кашеміру', 'Тепле та розкішне пальто для зимових днів.', 'https://i.postimg.cc/ZqMVK29V/images.jpg', '2500 грн')">
+                <img src="https://i.postimg.cc/ZqMVK29V/images.jpg" alt="Товар 8">
+                <h3>Пальто з кашеміру</h3>
+                <p>Тепле та розкішне пальто для зимових днів.</p>
+            </div>
+            <div class="product-item" onclick="openModal('Стильний рюкзак', 'Модний рюкзак для зручного носіння речей.', 'https://i.postimg.cc/ZqMVK29V/images.jpg', '600 грн')">
+                <img src="https://i.postimg.cc/ZqMVK29V/images.jpg" alt="Товар 9">
+                <h3>Стильний рюкзак</h3>
+                <p>Модний рюкзак для зручного носіння речей.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Модальне вікно -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="productTitle"></h2>
+            <img id="productImage" src="" alt="Товар" style="width: 95%; height: auto; border-radius: 5px;"> <!-- Зменшене зображення -->
+            <p id="productDescription"></p>
+            <p id="productPrice"></p>
+
+            <!-- Додаткові картинки товару -->
+            <div class="modal-images">
+                <img id="productImage1" src="" alt="Додаткове зображення 1">
+                <img id="productImage2" src="" alt="Додаткове зображення 2">
+                <img id="productImage3" src="" alt="Додаткове зображення 3">
+            </div>
+        </div>
+    </div>
+
+    <!-- Секція контактів -->
+    <section id="contact" class="contact">
+        <h1>Контакти</h1>
+        <p><b>Зв'яжіться з нами через електронну пошту або за телефоном для запитів чи консультацій.</b></p>
+        <p>+380*********</p>
+        <p>e-mail</p>
+        <p>tik tok</p>
+        <p>тгк</p>
+        <p>instagram</p>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <p>&copy; 2025 Магазин Одягу </p>
+    </footer>
+
+    <script>
+        // Відкриття модального вікна
+        function openModal(title, description, image, price) {
+            document.getElementById('productTitle').innerText = title;
+            document.getElementById('productDescription').innerText = description;
+            document.getElementById('productImage').src = image;
+            document.getElementById('productPrice').innerText = price;
+
+            // Додаємо додаткові картинки товару
+            document.getElementById('productImage1').src = image;  // Приклад додаткового зображення
+            document.getElementById('productImage2').src = image;  // Приклад додаткового зображення
+            document.getElementById('productImage3').src = image;  // Приклад додаткового зображення
+
+            document.getElementById('myModal').style.display = "block";
+        }
+
+        // Закриття модального вікна
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
+
+        // Закриття модального вікна при кліку поза вікном
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('myModal')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
